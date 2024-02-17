@@ -1,0 +1,21 @@
+// .containerFooter {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // margin-top: 34%;
+    // padding: 1.5rem 0;
+    // width: 100vw;
+    // height: 6rem;
+    
+
+// }
+
+footer {
+    display: flex;
+    position: relative;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    /* width: 117px; */
+    max-height: 600px;
+}
