@@ -27,14 +27,14 @@ export const ContactModal = ({ children, setIsOpen }) => {
                         placeholder="Email"
                         type="email"
                         className="btn-tertiary login"
-                        error={errors.name}
+                        error={errors.email}
                         {...register("email")}
                     />
                     <Input
                         placeholder="Telefone"
                         type="tel"
                         className="btn-tertiary login"
-                        error={errors.name}
+                        error={errors.tel}
                         {...register("tel")}
                     /> 
                     <button type="submit">Atualizar</button>
