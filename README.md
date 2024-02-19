@@ -5,9 +5,7 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 1. Clonar repositorio
 
 ## Primeiros passos:
-1. cd front-end
-2. npm install  
-3. npm run dev
+
 
 # Front-end
 1. Entre na pasta do Front-End: cd desafio-fullstack-front
