@@ -23,7 +23,7 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 5. Executre a migração : npm run typeorm migration:run -- -d src/data-source
 6. Agora rode o comando para iniciar o servidor : npm run dev
 
-
-------
+Métodos | EndPoints | Descrição|
+--------|-----------|----------|
 | GET | /clients 
  
