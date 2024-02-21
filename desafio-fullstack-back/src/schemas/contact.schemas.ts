@@ -3,7 +3,7 @@ import { clientReadSchema, clientReturnSchema, clientSchema } from "./client.sch
 
 export const contactSchema = z.object({
     id: z.string(),
-    email: z.string().email(),
+    email: z.string().email().nonempty("Email é obrigatorio"),
     tel: z.string().max(11),
     registrationDate: z.string().or(z.date()),
     clientId: z.string(),
