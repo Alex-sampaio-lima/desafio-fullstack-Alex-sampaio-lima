@@ -12,7 +12,7 @@ ol {
 button {
     cursor: pointer;
     // background: transparent;
-    // border: none;
+    border: none;
 }
 
 a {
@@ -35,6 +35,8 @@ body {
     background-size: cover;
     background-position: center;
     position: fixed;
+    width: 100vw;
+    height: 100vh;
     top: 0;
     right: 0;
     bottom: 0;
