@@ -14,7 +14,6 @@ export const createClientService = async (data: ClientCreate): Promise<ClientRet
 export const readClientsService = async (): Promise<ClientRead> => {
     const clients: ClientRead = await clientRepo.find({ relations: { contact: true } })
     return clientReadSchema.parse(clients);
-    // return clients;
 }
 
 export const updateClienteService = async (client: Client, data: ClientUpdate): Promise<ClientReturn> => {
