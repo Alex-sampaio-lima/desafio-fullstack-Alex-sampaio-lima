@@ -25,5 +25,6 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 
 Métodos | EndPoints | Descrição| Autenticação e Autorização|
 --------|-----------|----------|---------------------------|
-| GET | /clients    | Lista todos os clientes | Apenas os administradores podem listar todos os clinetes 
+| GET | /client   | Lista todos os clientes | Apenas os administradores podem listar todos os clinetes |
+| GET |  
  
