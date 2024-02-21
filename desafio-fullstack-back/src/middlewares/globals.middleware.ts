@@ -1,8 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import AppError from "../errors/AppError.error";
 import { verify } from "jsonwebtoken";
-import Contact from "../entities/contact.entity";
-import { clientRepo, contactRepo } from "../repositories";
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
     const { authorization } = req.headers;
@@ -42,10 +40,7 @@ export const verifyContactPermission = (req: Request, res: Response, next: NextF
     const { sub } = res.locals.decoded
     const { admin } = res.locals.decoded
     const foundContact = res.locals.foundContact.clientId
-    console.log("sub=", sub)
-    console.log("Contact=", foundContact)
     if (admin) return next()
-
 
     if (foundContact !== sub) {
         throw new AppError("Insufficient permissions, you don't have access to this account ", 409)
