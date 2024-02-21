@@ -7,6 +7,7 @@ import { Input } from "../Input"
 import { Link } from "react-router-dom"
 import { ClientContext } from "../../../providers/client.provider"
 import { toast } from "react-toastify"
+import style from "./style.module.scss"
 
 export const RegisterForm = () => {
 
@@ -41,13 +42,13 @@ export const RegisterForm = () => {
 
     return (
         <>
-            <header>Register Page</header>
-            <h1>Página de Registro</h1>
-
-            <section>
-                <form onSubmit={handleSubmit(submit)}>
+            <section className={`${style.containerSectionForm}`}>
+                <h1 className="title1 primary">Registro de Usuario</h1>
+                <form className={`${style.containerRegisterForm}`} onSubmit={handleSubmit(submit)}>
                     <Input
-                        label="Nome: "
+                        label=""
+                        labelClass="headline blue"
+                        className="btn-tertiary login"
                         type="text"
                         placeholder="Digite seu nome aqui"
                         error={errors.name}
@@ -55,7 +56,9 @@ export const RegisterForm = () => {
                         disabled={loading}
                     />
                     <Input
-                        label="Senha: "
+                        label=""
+                        labelClass="headline blue"
+                        className="btn-tertiary login"
                         type="text"
                         placeholder="Digite sua senha"
                         error={errors.password}
@@ -63,23 +66,23 @@ export const RegisterForm = () => {
                         disabled={loading}
                     />
                     <Input
-                        label="Telefone: "
+                        label=""
+                        labelClass="headline blue"
+                        className="btn-tertiary login"
                         type="text"
                         placeholder="Digite seu telefone aqui"
                         error={errors.tel}
                         {...register("tel")}
                         disabled={loading}
                     />
-                    <button type="submit" disabled={loading}>
+                </form>
+                    <button className="btn-tertiary register" type="submit" disabled={loading}>
                         {loading ? "Registrando..." : "Registrar"}
                     </button>
-                </form>
+                    <Link className="btn-tertiary loginRegister" to="/login">
+                        Login
+                    </Link>
             </section>
-
-            <Link to="/login">
-                Aperte aqui para ir para a página de login
-            </Link>
-
         </>
     )
 }
