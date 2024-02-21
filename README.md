@@ -24,8 +24,6 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 6. Agora rode o comando para iniciar o servidor : npm run dev
 
 
-
+------
 | GET | /clients 
-|
-|
-| 
+ 
