@@ -69,7 +69,7 @@ export const LoginForm = () => {
                     />
                     <div className={`${style.containerButtonLogin}`}>
                         <button className="btn-tertiary register headline blue" type="submit">Entrar</button>
-                        <h3 className="headline big black ">Não tem conta ainda ?</h3>
+                        <h3 className="headline black">Não tem conta ainda ?</h3>
                         <Link className="btn-tertiary register headline blue" to="/register" disabled={loading}> Inscreva-se </Link>
                     </div>
                 </form>
