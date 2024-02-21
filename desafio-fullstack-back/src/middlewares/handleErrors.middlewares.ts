@@ -15,7 +15,7 @@ export const handlErrors = (err: unknown, req: Request, res: Response, next: Nex
     if (err instanceof JsonWebTokenError) {
         return res.status(401).json({ message: err.message })
     }
-    
+
     console.log(err);
     return res.status(500).json({ message: "Internal Server Error" });
 };
