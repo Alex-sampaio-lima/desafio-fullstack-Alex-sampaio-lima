@@ -27,6 +27,5 @@ export const createLoginService = async (data: ClientLoginCreate): Promise<Clien
         { subject: client.id.toString(), expiresIn: process.env.EXPIRES_IN! }
     )
     
-
     return { token }
 }
