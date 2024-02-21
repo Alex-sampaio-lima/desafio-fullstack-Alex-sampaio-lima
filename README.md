@@ -8,7 +8,6 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 
 
 # Front-end
-## Passo a Passo:
 1. Entre na pasta do Front-End: cd desafio-fullstack-front
 2. Instale o React usando o Vite: npm create vite@latest 
 3. Rode o comando : npm install
@@ -16,7 +15,6 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 
 
 # Back-end
-## Passo a Passo:
 1. Entre na pasta do banc-end : cd desafio-fullstack-front
 2. Depois inicie uma aplicação em node : npm init -y
 3. crie o arquivo .env com base no arquivo .env.example
