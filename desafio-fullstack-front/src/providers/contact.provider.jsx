@@ -10,37 +10,37 @@ export const ContactProvider = ({ children }) => {
     const token = localStorage.getItem("@TOKEN")
 
 
-    console.log(contactList)
-    console.log(token)
-
     const editContact = async (id, formData) => {
         try {
-            const response = await api.patch(`/contact/${id}`, formData, {
+            const { data } = await api.patch(`/contact/${id}`, { "email": formData[0], "tel": formData[1] }, {
                 headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                    Authorization: `Bearer ${token}`
+                }
             })
 
             const newContactList = contactList.map(contact => {
-                if (contact.id === editingContact.id) {
-                    return data;
+                if (contact.id === id) {
+                    return data
                 } else {
                     return contact
                 }
             })
-            console.log("Data", response.data.editingContact)
+            console.log({"tel": formData[1]})
+
             setContactList(newContactList)
-            console.log("contact", contactList)
-            setEditingContact(response.data.editingContact)
             toast.success("Contato atualizado com sucesso!")
         } catch (error) {
             if (error.response?.data.message === "Phone number isn't valid, must be 11.") {
+                toast.error("Numero maior que 11")
+            }
+            if (error.response?.data.message === "Email already exists, try another one") {
                 toast.error("Numero maior que 11")
             }
             console.log(error)
             toast.error("Falha ao atualizar o contato")
         }
     }
+
 
     const contactListCreate = async (formData) => {
         try {
@@ -61,6 +61,7 @@ export const ContactProvider = ({ children }) => {
         }
     }
 
+
     const getContacts = async () => {
         try {
             const { data } = await api.get("/contact", { headers: { Authorization: `Bearer ${token}` } })
@@ -72,6 +73,7 @@ export const ContactProvider = ({ children }) => {
             }
         }
     }
+
 
     const deleteContact = async (deleteId) => {
         try {
@@ -96,13 +98,9 @@ export const ContactProvider = ({ children }) => {
         }
     }, [])
 
-
     return (
         <ContactContext.Provider value={{ contactList, getContacts, contactListCreate, deleteContact, editContact }}>
             {children}
         </ContactContext.Provider>
-
     )
-
-
 }
