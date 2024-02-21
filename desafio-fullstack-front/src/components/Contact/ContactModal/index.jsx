@@ -36,7 +36,6 @@ export const ContactModal = ({ children, setIsOpen, contact }) => {
                         {...register("tel")}
                     />
                     <button className="btn-tertiary edit" title="Editar" type="button" onClick={() => editContact(contact.id, getValues(["email", "tel"]))}>Editar</button>
-                    {console.log(getValues(["email", "tel"]))}
                 </form>
             </div>
         </div>
