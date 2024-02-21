@@ -7,7 +7,7 @@ export const Footer = ({ children }) => {
 
     return (
         <footer className={`${style.containerFooter}`}>
-            <p className="headline">Direitos reservado para - Autor Desconhecido </p>
+            <p className="headline">Direitos reservado para - {client?.name} </p>
         </footer>
     )
 }
