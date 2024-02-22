@@ -15,13 +15,14 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 
 
 # Back-end
-## Primeiros passos:
 1. Entre na pasta do banc-end : cd desafio-fullstack-front
 2. Depois inicie uma aplicação em node : npm init -y
 3. crie o arquivo .env com base no arquivo .env.example
 4. Gere a migração : npm run typeorm migration:generate src/migrations/mensagemDescritiva -- -d src/data-source
 5. Executre a migração : npm run typeorm migration:run -- -d src/data-source
 6. Agora rode o comando para iniciar o servidor : npm run dev
+
+
 
 Métodos | EndPoints | Descrição| Autenticação e Autorização|
 --------|-----------|----------|---------------------------|
