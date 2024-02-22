@@ -25,6 +25,7 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 
 Métodos | EndPoints | Descrição| Autenticação e Autorização|
 --------|-----------|----------|---------------------------|
-| GET | /client   | Lista todos os clientes | Apenas os administradores podem listar todos os clinetes |
-| GET |  
- 
+| GET    | /client      | Lista todos os clientes     | Apenas os administradores              |
+| POST   | /client      | Cadastrar clientes          | Todos clientes, token não é necessário |
+| PATCH  | /client/{id} | Atualizar dados de clientes | Administradores e donos da conta       | 
+| DELETE | /client/{id} | Cadastrar clientes          | Todos clientes, token não é necessário |
