@@ -26,7 +26,7 @@ export const RegisterForm = () => {
             setClient(data)
             toast.success("Registro Realizado com sucesso!")
         } catch (error) {
-            console.log(error)
+            console.error(error)
             if (error.response?.data.message == "Name already exists, try another one") {
                 toast.error("Usuario já cadastrado!")
             }

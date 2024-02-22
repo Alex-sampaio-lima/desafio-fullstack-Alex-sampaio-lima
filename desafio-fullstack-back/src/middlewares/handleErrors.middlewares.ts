@@ -16,6 +16,6 @@ export const handlErrors = (err: unknown, req: Request, res: Response, next: Nex
         return res.status(401).json({ message: err.message })
     }
 
-    console.log(err);
+    console.error(err);
     return res.status(500).json({ message: "Internal Server Error" });
 };

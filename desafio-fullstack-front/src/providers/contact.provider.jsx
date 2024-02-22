@@ -25,7 +25,6 @@ export const ContactProvider = ({ children }) => {
                     return contact
                 }
             })
-            console.log({"tel": formData[1]})
 
             setContactList(newContactList)
             toast.success("Contato atualizado com sucesso!")
@@ -36,7 +35,7 @@ export const ContactProvider = ({ children }) => {
             if (error.response?.data.message === "Email already exists, try another one") {
                 toast.error("Numero maior que 11")
             }
-            console.log(error)
+            console.error(error)
             toast.error("Falha ao atualizar o contato")
         }
     }
@@ -86,7 +85,7 @@ export const ContactProvider = ({ children }) => {
             setContactList(newContactList)
             toast.success("Contato excluido!")
         } catch (error) {
-            console.log(error)
+            console.error(error)
             toast.error("Falha ao excluir contato!")
         }
     }

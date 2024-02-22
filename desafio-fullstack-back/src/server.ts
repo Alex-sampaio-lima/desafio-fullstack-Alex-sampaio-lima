@@ -10,6 +10,6 @@ AppDataSource.initialize()
 
         app.listen(PORT, (): void => console.log(`App is running at port: ${PORT}`));
     })
-    .catch((error: unknown) => console.log(error))
+    .catch((error: unknown) => console.error(error))
 
 
