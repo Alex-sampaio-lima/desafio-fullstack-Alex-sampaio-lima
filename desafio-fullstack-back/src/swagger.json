@@ -1,0 +1,963 @@
+{
+
+    "openapi": "3.0.3",
+    "info": {
+        "title": "CRUD de clientes",
+        "description": "API desenvolvida para projeto voltado ao ensino",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Development env"
+        },
+        {
+            "url": "http://onrender-clientes-api.com",
+            "description": "Production env"
+        }
+    ],
+    "paths": {
+        "/client": {
+            "get": {
+                "description": "Rota responsavel por buscar todos os usuarios e seus contatos cadastrados. Apenas Adminstradores podem listar todos.",
+                "tags": [
+                    "Clientes: Rotas sem parâmetros "
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": [
+                                            {
+                                                "id": "8a6e6bc8-8997-44fd-9c78-5bff13deece7",
+                                                "name": "Alex",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-10T02:50:12.553Z",
+                                                "admin": false,
+                                                "contact": [
+                                                    {
+                                                        "id": "541c03e0-7555-4f01-a4dd-bc06b4125ec9",
+                                                        "email": "alexsandersampaiolima12@gmail.com",
+                                                        "tel": "11940264105",
+                                                        "registrationDate": "2024-02-25T05:37:46.787Z"
+                                                    },
+                                                    {
+                                                        "id": "9da1a5d4-fa39-40e5-b718-c04486c92713",
+                                                        "email": "alexsampaio755@gmail.com",
+                                                        "tel": "11940264105",
+                                                        "registrationDate": "2024-02-25T05:37:57.589Z"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "9d4c281c-2280-419d-b11e-570ec9e3f671",
+                                                "name": "Carlos",
+                                                "tel": "11923444453",
+                                                "registrationDate": "2024-02-10T02:50:08.544Z",
+                                                "admin": true,
+                                                "contact": [
+                                                    {
+                                                        "id": "5b0b426b-85c7-4d87-96ef-5c496766bb99",
+                                                        "email": "alexlima@gmail.com",
+                                                        "tel": "11940264105",
+                                                        "registrationDate": "2024-02-25T05:43:43.006Z"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "bb841e1e-45f9-48a1-ba6e-fa61673d4c24",
+                                                "name": "ana",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-13T22:28:18.502Z",
+                                                "admin": false,
+                                                "contact": [
+                                                    {
+                                                        "id": "498a0be2-cfff-40af-825b-99d51b1f45d1",
+                                                        "email": "aninha@gmail.com",
+                                                        "tel": "11940264105",
+                                                        "registrationDate": "2024-02-25T16:07:28.017Z"
+                                                    },
+                                                    {
+                                                        "id": "31024ae5-df4c-40bf-9b8d-40909eee4371",
+                                                        "email": "analima@gmail.com",
+                                                        "tel": "11940264105",
+                                                        "registrationDate": "2024-02-25T16:09:18.620Z"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": "bf6845e3-f7c6-4bd7-996b-5f8377640fcc",
+                                                "name": "Pedrão",
+                                                "tel": "11940264107",
+                                                "registrationDate": "2024-02-25T15:04:15.331Z",
+                                                "admin": false,
+                                                "contact": []
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing bearer token",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "client": {
+                                        "value": {
+                                            "message": "Missing bearer token"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Insufficient permissions",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "client": {
+                                        "value": {
+                                            "message": "Insufficient permissions"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": []
+            },
+            "post": {
+                "description": "Rota responsavel por criar os clientes",
+                "tags": [
+                    "Clientes: Rotas sem parâmetros "
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/createClient"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/returnCreateClient"
+                                },
+                                "examples": {
+                                    "client": {
+                                        "value": {
+                                            "id": "e870fc0c-0bf8-4e39-b613-236850d97d9a",
+                                            "name": "Clara",
+                                            "tel": "11940264107",
+                                            "registrationDate": "2024-02-25T19:06:35.263Z",
+                                            "admin": "false"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "errorNameExists": {
+                                        "value": {
+                                            "message": "Name already exists, try another one"
+                                        }
+                                    },
+                                    "errorNumberIsntValid": {
+                                        "value": {
+                                            "message": "Phone number isn't valid, must be 11."
+                                        }
+                                    },
+                                    "errorNumberCannotBeNull": {
+                                        "value": {
+                                            "message": "The phone number cannot be null."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/client/:clientId": {
+            "get": {
+                "description": "Rota responsável por listar o cliente com os seus contatos pelo Id. Apenas donos da conta e Administradores têm acesso a essa rota.",
+                "tags": [
+                    "Clientes: Rotas com parâmetros"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "description": "Id do cliente que se deseja buscar",
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "responses": {
+                                        "value": [
+                                            {
+                                                "id": "8a6e6bc8-8997-44fd-9c78-5bff13deece7",
+                                                "name": "Alex",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-10T02:50:12.553Z",
+                                                "contact": [
+                                                    {
+                                                        "id": "541c03e0-7555-4f01-a4dd-bc06b4125ec9",
+                                                        "email": "alexsandersampaiolima12@gmail.com",
+                                                        "tel": "11940264105",
+                                                        "registrationDate": "2024-02-25T05:37:46.787Z"
+                                                    },
+                                                    {
+                                                        "id": "9da1a5d4-fa39-40e5-b718-c04486c92713",
+                                                        "email": "alexsampaio755@gmail.com",
+                                                        "tel": "11940264105",
+                                                        "registrationDate": "2024-02-25T05:37:57.589Z"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Essa rota é responsável por criar um contato com base no id do Cliente que está sendo passado como parâmetro.",
+                "tags": [
+                    "Clientes: Rotas com parâmetros"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "description": "Id do cliente que deseja criar um contato",
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/createContact"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "contact": {
+                                        "value": {
+                                            "id": "e415c9ab-9228-4b6f-86bd-5774c38ecf9a",
+                                            "email": "Alex@gmail.com",
+                                            "tel": "11940264105",
+                                            "registrationDate": "2024-02-25T22:10:36.295Z",
+                                            "clientId": "bb841e1e-45f9-48a1-ba6e-fa61673d4c24"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "telConflictError": {
+                                        "value": {
+                                            "message": "Phone number isn't valid, must be 11."
+                                        }
+                                    },
+                                    "emailConflictError": {
+                                        "value": {
+                                            "message": "Email already exists, try another one"
+                                        }
+                                    },
+                                    "permissionConflictError": {
+                                        "value": {
+                                            "message": "Insufficient permissions, you don't have access to this account "
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "idNotFoundError": {
+                                        "value": {
+                                            "message": "Client not found."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing bearer token",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "missingTokenError": {
+                                        "value": {
+                                            "message": "Missing bearer token"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Rota responsável por atualizar os clientes.",
+                "tags": [
+                    "Clientes: Rotas com parâmetros"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "description": "Id do cliente que se deseja buscar",
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/updateClient"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Updated",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "client": {
+                                        "value": {
+                                            "name": "Alex",
+                                            "password": "1234",
+                                            "tel": "11940264105"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Insufficient permissions, you don't have access to this account ",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "client": {
+                                        "value": {
+                                            "message": "Insufficient permissions, you don't have access to this account "
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing bearer token",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "client": {
+                                        "value": {
+                                            "message": "Missing bearer token"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Rota responsável por deletar os clientes pelo id.",
+                "tags": [
+                    "Clientes: Rotas com parâmetros"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "description": "Id do cliente que deseja excluir",
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No body context",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "client": {
+                                        "value": "no body returned for response"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "client": {
+                                        "value": {
+                                            "message": "Client not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Insufficient permissions, you don't have access to this account ",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "client": {
+                                        "value": {
+                                            "message": "Insufficient permissions, you don't have access to this account"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contact": {
+            "get": {
+                "description": "Rota responsável por listar todos os contatos, apenas os Administradores podem acessar essa rota.",
+                "tags": [
+                    "Contato: Rotas sem parâmetros"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": [
+                                            {
+                                                "id": "06d0ac5f-2fa5-45b3-80b7-8bfdf1fe066b",
+                                                "email": "alexsandersampaiolima12@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T21:57:17.375Z",
+                                                "clientId": "613253b1-8a42-475e-8479-db17296208c5"
+                                            },
+                                            {
+                                                "id": "9e3070e4-e3aa-4a66-87d9-129c8c86e237",
+                                                "email": "alexsampaio755@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T21:57:22.072Z",
+                                                "clientId": "613253b1-8a42-475e-8479-db17296208c5"
+                                            },
+                                            {
+                                                "id": "498a0be2-cfff-40af-825b-99d51b1f45d1",
+                                                "email": "aninha@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T16:07:28.017Z",
+                                                "clientId": "bb841e1e-45f9-48a1-ba6e-fa61673d4c24"
+                                            },
+                                            {
+                                                "id": "31024ae5-df4c-40bf-9b8d-40909eee4371",
+                                                "email": "analima@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T16:09:18.620Z",
+                                                "clientId": "bb841e1e-45f9-48a1-ba6e-fa61673d4c24"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "insufficient permissions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "message": "insufficient permissions"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contact/:contactId": {
+            "get": {
+                "description": "Rota responsavel por listar apenas um contato usando o id como parâmetro.",
+                "tags": [
+                    "Contato: Rotas com parâmetros"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "description": "Id do contato que se deseja buscar",
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": [
+                                            {
+                                                "id": "06d0ac5f-2fa5-45b3-80b7-8bfdf1fe066b",
+                                                "email": "alexsandersampaiolima12@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T21:57:17.375Z",
+                                                "clientId": "613253b1-8a42-475e-8479-db17296208c5"
+                                            },
+                                            {
+                                                "id": "9e3070e4-e3aa-4a66-87d9-129c8c86e237",
+                                                "email": "alexsampaio755@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T21:57:22.072Z",
+                                                "clientId": "613253b1-8a42-475e-8479-db17296208c5"
+                                            },
+                                            {
+                                                "id": "e415c9ab-9228-4b6f-86bd-5774c38ecf9a",
+                                                "email": "Alex@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T22:10:36.295Z",
+                                                "clientId": "bb841e1e-45f9-48a1-ba6e-fa61673d4c24"
+                                            },
+                                            {
+                                                "id": "0e7d2805-1ac6-43eb-bb9a-86906887b2ce",
+                                                "email": "klebsonenf@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T22:26:21.321Z",
+                                                "clientId": "613253b1-8a42-475e-8479-db17296208c5"
+                                            },
+                                            {
+                                                "id": "498a0be2-cfff-40af-825b-99d51b1f45d1",
+                                                "email": "aninha@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T16:07:28.017Z",
+                                                "clientId": "bb841e1e-45f9-48a1-ba6e-fa61673d4c24"
+                                            },
+                                            {
+                                                "id": "31024ae5-df4c-40bf-9b8d-40909eee4371",
+                                                "email": "analima@gmail.com",
+                                                "tel": "11940264105",
+                                                "registrationDate": "2024-02-25T16:09:18.620Z",
+                                                "clientId": "bb841e1e-45f9-48a1-ba6e-fa61673d4c24"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "insufficient permissions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "message": "insufficient permissions"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Rota responsável por atualizar um contato pegando o Id como parâmetro.",
+                "tags": [
+                    "Contato: Rotas com parâmetros"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "description": "Id do cliente que se deseja atualizar",
+                        "name": "id"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/updateContact"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "contact": {
+                                        "value": {
+                                            "email": "Alex@gmail.com",
+                                            "tel": "11940264105"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "message": "Email already exists, try another one"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "message": "Contact not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "message": "Missing Bearer Token"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Rota responsável por deletar o contato de um cliente.",
+                "tags": [
+                    "Contato: Rotas com parâmetros"
+                ],
+                "parameters": [
+                    {
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "query",
+                        "description": "Id do cliente que se deseja deletar",
+                        "name": "id"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Body content"
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "missingTokenError": {
+                                        "value": {
+                                            "message": "Missing Bearer Token"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "permissionError": {
+                                        "value": {
+                                            "message": "Insufficient Permissions"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "NotFoundError": {
+                                        "value": {
+                                            "message": "Client not found"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "Rota responsável por realizar o login dos clientes",
+                "tags": [
+                    "Login: Rotas sem parâmetros"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/login"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "200",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/loginReturn"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "response": {
+                                        "value": {
+                                            "message": "Invalid credentials"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "createClient": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "tel": {
+                        "type": "string"
+                    }
+                }
+            },
+            "createAdmin": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "tel": {
+                        "type": "string"
+                    },
+                    "admin": {
+                        "type": "boolean"
+                    }
+                }
+            },
+            "returnCreateClient": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "tel": {
+                        "type": "string"
+                    },
+                    "registrationDate": {
+                        "type": "string"
+                    },
+                    "admin": {
+                        "type": "string"
+                    }
+                }
+            },
+            "updateClient": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "tel": {
+                        "type": "string"
+                    }
+                }
+            },
+            "createContact": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "tel": {
+                        "type": "string"
+                    }
+                }
+            },
+            "updateContact": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "tel": {
+                        "type": "string"
+                    }
+                }
+            },
+            "login": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            },
+            "loginReturn": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        {
+            "JWT": []
+        }
+    ]
+}
