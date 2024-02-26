@@ -2,13 +2,13 @@ import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode"
+
 
 export const ClientContext = createContext({});
 
 export const ClientProvider = ({ children }) => {
 
-    const [client, setClient] = useState(null);
+    const [client, setClient] = useState();
     const [clientList, setClientList] = useState([]);
     const [loading, setLoading] = useState(false);
     const [count, setCount] = useState(false);
