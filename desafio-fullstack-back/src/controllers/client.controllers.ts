@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createClientService, deleteClientService, readClientsService, updateClienteService } from "../services/clients.services";
+import { createClientService, deleteClientService, readClientByIdService, readClientsService, updateClienteService } from "../services/clients.services";
 import Client from "../entities/client.entity";
 import { ClientRead, ClientReturn, ClientUpdate } from "../interfaces/client.interface";
 
@@ -12,7 +12,11 @@ export const readClientsController = async (req: Request, res: Response): Promis
     const clients: ClientRead = await readClientsService()
     return res.status(200).json(clients)
 }
-
+export const readClientByIdController = async (req: Request, res: Response): Promise<Response> => {
+    const { clientId } = req.params
+    const client = await readClientByIdService(clientId)
+    return res.status(200).json(client)
+}
 export const updateClientController = async (req: Request, res: Response): Promise<Response> => {
     const { foundClient } = res.locals
     // const clientFound = req.params.clientId
