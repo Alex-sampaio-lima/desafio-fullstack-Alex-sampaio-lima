@@ -9,13 +9,13 @@ import { ContactContext } from "../../providers/contact.provider"
 export const DashBoardPage = ({ }) => {
 
     const { contactList } = useContext(ContactContext)
-
+    const { client, clientList } = useContext(ClientContext)
 
     return (
         <main>
             <Header title="Contatos de Clientes" />
             <ContactForm />
-            <Contact contacts={contactList}/>
+            <Contact client={client} clientList={clientList} />
             <Footer />
         </main>
     )
