@@ -1,7 +1,7 @@
 import Client from "../entities/client.entity";
 import { clientRepo } from "../repositories";
-import { ClientCreate, ClientRead, ClientReturn, ClientUpdate } from "../interfaces/client.interface";
-import { clientReadSchema, clientReturnSchema, clientUpdateSchema } from "../schemas/client.schemas";
+import { ClientCreate, ClientRead, ClientReadById, ClientReturn, ClientUpdate } from "../interfaces/client.interface";
+import { clientReadByIdSchema, clientReadSchema, clientReturnSchema, clientUpdateSchema } from "../schemas/client.schemas";
 import Contact from "../entities/contact.entity";
 
 
@@ -14,6 +14,10 @@ export const createClientService = async (data: ClientCreate): Promise<ClientRet
 export const readClientsService = async (): Promise<ClientRead> => {
     const clients: ClientRead = await clientRepo.find({ relations: { contact: true } })
     return clientReadSchema.parse(clients);
+}
+export const readClientByIdService = async (clientId: string): Promise<ClientReadById> => {
+    const client: ClientReadById = await clientRepo.find({ where: { id: clientId }, relations: { contact: true } })
+    return clientReadByIdSchema.parse(client);
 }
 
 export const updateClienteService = async (client: Client, data: ClientUpdate): Promise<ClientReturn> => {
