@@ -10,7 +10,7 @@ export const ContactContext = createContext({});
 export const ContactProvider = ({ children }) => {
     const [contactList, setContactList] = useState([])
     const [editingContact, setEditingContact] = useState()
-    const { setLoading, loading, setClientList, clientList, getClientById, count, setCount } = useContext(ClientContext)
+    const { setLoading, setClientList, count, setCount } = useContext(ClientContext)
     const navigate = useNavigate()
 
 
@@ -29,6 +29,7 @@ export const ContactProvider = ({ children }) => {
             setContactList(newContactList)
             toast.success("Contato atualizado com sucesso!")
             navigate("/dashboard")
+            setCount(!count)
         } catch (error) {
             if (error.response?.data.message === "Phone number isn't valid, must be 11.") {
                 toast.error("Numero invalido")
@@ -51,6 +52,7 @@ export const ContactProvider = ({ children }) => {
             })
             setContactList([...contactList, data])
             toast.success("Contato criado com sucesso!")
+            setCount(!count)
         } catch (error) {
             console.error(error)
             if (error.response?.data.message === "Email already exists, try another one") {
@@ -90,6 +92,7 @@ export const ContactProvider = ({ children }) => {
         try {
             const { data } = await api.get(`/contact`, { headers: { Authorization: `Bearer ${token}` } })
             setClientList(data)
+            setCount(!count)
         } catch (error) {
             if (error.response?.data.message === "insufficient permissions") {
                 toast.error("Você não tem permissão para listar todos os contatos")
