@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createClientController, deleteClientController, readClientsController, updateClientController } from "../controllers/client.controllers";
+import { createClientController, deleteClientController, readClientByIdController, readClientsController, updateClientController } from "../controllers/client.controllers";
 import { verifyIdClientExists } from "../middlewares/verifyIdClientExists.middleware";
 import { validateBody } from "../middlewares/validatedBody.middleware";
 import { clientCreateSchema, clientUpdateSchema } from "../schemas/client.schemas";
@@ -10,9 +10,9 @@ import { verifyAdmin, verifyPermission, verifyToken } from "../middlewares/globa
 export const clientRouter: Router = Router();
 
 clientRouter.get("/", verifyToken, verifyAdmin, readClientsController)
+clientRouter.get("/:clientId", verifyToken, verifyPermission, readClientByIdController)
 clientRouter.post("/", validateBody(clientCreateSchema), ifClientNameExists, vefiryIfTelIsValid, createClientController)
 
 clientRouter.use("/:clientId", verifyIdClientExists)
-
 clientRouter.patch("/:clientId", validateBody(clientUpdateSchema), verifyToken, verifyPermission, vefiryIfTelIsValid, updateClientController)
 clientRouter.delete("/:clientId", verifyToken, verifyPermission, deleteClientController)
