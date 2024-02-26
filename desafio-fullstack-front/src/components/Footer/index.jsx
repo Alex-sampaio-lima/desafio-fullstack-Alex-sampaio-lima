@@ -6,7 +6,7 @@ export const Footer = ({ children }) => {
     const { client } = useContext(ClientContext)
 
     if (!client) {
-        console.error("Client not found!")
+        return <div>Usuário não encontrado</div>
     }
 
     return (
