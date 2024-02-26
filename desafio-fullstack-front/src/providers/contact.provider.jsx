@@ -90,7 +90,6 @@ export const ContactProvider = ({ children }) => {
         try {
             const { data } = await api.get(`/contact`, { headers: { Authorization: `Bearer ${token}` } })
             setClientList(data)
-            console.log("daqui", clientList)
         } catch (error) {
             if (error.response?.data.message === "insufficient permissions") {
                 toast.error("Você não tem permissão para listar todos os contatos")
@@ -103,7 +102,6 @@ export const ContactProvider = ({ children }) => {
     useEffect(() => {
         const admin = localStorage.getItem("@ADMIN")
         if (admin == "true") {
-            console.log("admin dentro", admin)
             getContacts()
         }
     }, [count])
