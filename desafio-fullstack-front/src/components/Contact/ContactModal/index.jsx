@@ -35,7 +35,7 @@ export const ContactModal = ({ children, setIsOpen, contact }) => {
                         error={errors.tel}
                         {...register("tel")}
                     />
-                    <button className="btn-tertiary edit" title="Editar" type="button" onClick={() => editContact(contact.id, getValues(["email", "tel"]))}>Editar</button>
+                    <button className="btn-tertiary edit" title="Editar" type="button" onClick={() => { setIsOpen(false); editContact(contact.id, getValues(["email", "tel"])) }}>Editar</button>
                 </form>
             </div>
         </div>
