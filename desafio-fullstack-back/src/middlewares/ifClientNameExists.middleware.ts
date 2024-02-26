@@ -7,7 +7,7 @@ export const ifClientNameExists = async (req: Request, res: Response, next: Next
     const { name } = req.body
     const client: Client | null = await clientRepo.findOneBy({ name })
     if (client) {
-        throw new AppError("Name already exists, try another one", 404)
+        throw new AppError("Name already exists, try another one", 409)
     }
 
     return next();
