@@ -1,6 +1,5 @@
 import { z } from "zod";
-import { contactSchema, contactWitouthClient } from "./contact.schemas";
-
+import { contactWitouthClient } from "./contact.schemas";
 
 export const clientSchema = z.object({
     id: z.string(),
@@ -12,8 +11,9 @@ export const clientSchema = z.object({
 })
 
 export const clientCreateSchema = clientSchema.pick({ name: true, password: true, tel: true, admin: true })
-export const clientReturnSchema = clientSchema.omit({ password: true })
-export const clientReadSchema = clientReturnSchema.extend({contact: contactWitouthClient.array()}).array()
+export const clientReturnSchema = clientSchema.omit({ password: true, admin: true })
+export const clientReadSchema = clientReturnSchema.extend({ contact: contactWitouthClient.array() }).array()
+export const clientReadByIdSchema = clientSchema.extend({ contact: contactWitouthClient.array() }).omit({ password: true, admin: true }).array()
 export const clientWithoutAdminSchema = clientCreateSchema.omit({ admin: true })
 export const clientUpdateSchema = clientWithoutAdminSchema.omit({ password: true })
-export const clientLoginSchema = clientSchema.omit({ tel: true, admin: true, registrationDate: true })
+export const clientLoginSchema = clientSchema.omit({ tel: true, admin: true, registrationDate: true, id: true })
