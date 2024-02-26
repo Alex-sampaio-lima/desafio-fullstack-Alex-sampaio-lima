@@ -1,0 +1,298 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "CRUD de clientes",
+      "description": "API simples para armazenamento de email de clientes",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000",
+        "description": "Development env"
+      },
+      {
+        "url": "https://onrender-clientes-api.com",
+        "description": "production env"
+      }
+    ],
+    "paths": {
+      "/users": {
+        "get": {
+          "description": "Rota responsável por buscar todos os usuários cadastrados",
+          "tags": [
+            "Rotas sem parâmetros"
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array"
+                  },
+                  "examples": {
+                    "response": {
+                      "value": [
+                        {
+                          "id": 1,
+                          "name": "bertz",
+                          "email": "bertz2@mail.com"
+                        },
+                        {
+                          "id": 5,
+                          "name": "alana maia",
+                          "email": "alana@mail.com"
+                        },
+                        {
+                          "id": 6,
+                          "name": "filipe",
+                          "email": "filipe@mail.com"
+                        },
+                        {
+                          "id": 7,
+                          "name": "daniel verissimo",
+                          "email": "dani@mail.com"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {}
+          ]
+        },
+        "post": {
+          "description": "Rota responsável por cadastrar o email dos clientes",
+          "tags": [
+            "Rotas sem parâmetros"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createUser"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/readUser"
+                  },
+                  "examples": {
+                    "user": {
+                      "value": {
+                        "id": 1,
+                        "name": "rafael bertoldo",
+                        "email": "bertoldo@mail.com"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Conflict",
+              "content": {
+                "application/json": {
+                  "examples": {
+                    "conflictError": {
+                      "value": {
+                        "message": "Email already exists"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/:id": {
+        "get": {
+          "description": "Rota responsável por buscar o usuário informado",
+          "tags": [
+            "Rotas com parâmetros"
+          ],
+          "parameters": [
+            {
+              "schema": {
+                "type": "number"
+              },
+              "in": "query",
+              "description": "Id do usuário que deseja buscar",
+              "name": "id"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "examples": {
+                    "response": {
+                      "value": {
+                        "id": 1,
+                        "name": "bertz",
+                        "email": "bertz2@mail.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {}
+          ]
+        },
+        "patch": {
+          "description": "Rota responsável por atualizar os dados do usuário informado",
+          "tags": [
+            "Rotas com parâmetros"
+          ],
+          "parameters": [
+            {
+              "schema": {
+                "type": "number"
+              },
+              "in": "query",
+              "description": "Id do usuário que deseja buscar",
+              "name": "id"
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createUser"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/readUser"
+                  },
+                  "examples": {
+                    "user": {
+                      "value": {
+                        "id": 1,
+                        "name": "rafael jagochitz bertoldo",
+                        "email": "rafaeljb@mail.com"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "409": {
+              "description": "Conflict",
+              "content": {
+                "application/json": {
+                  "examples": {
+                    "conflictError": {
+                      "value": {
+                        "message": "Email already exists"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {}
+          ]
+        },
+        "delete": {
+          "description": "Rota responsável por deletar os dados do usuário informado",
+          "tags": [
+            "Rotas com parâmetros"
+          ],
+          "parameters": [
+            {
+              "schema": {
+                "type": "number"
+              },
+              "in": "query",
+              "description": "Id do usuário que deseja buscar",
+              "name": "id"
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "No Body content"
+            }
+          },
+          "security": [
+            {}
+          ]
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "createUser": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          }
+        },
+        "readUser": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          }
+        },
+        "readAllUser": {
+          "type": "array",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "security": [
+      {
+        "JWT": []
+      }
+    ]
+  }
