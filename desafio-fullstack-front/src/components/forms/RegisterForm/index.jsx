@@ -12,7 +12,8 @@ import style from "./style.module.scss"
 export const RegisterForm = () => {
 
     const { setClient } = useContext(ClientContext)
-    const [loading, setLoading] = useState(false)
+    const { setLoading } = useContext(ClientContext)
+    
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(clientRegisterSchema)
@@ -21,7 +22,7 @@ export const RegisterForm = () => {
 
     const clientRegister = async (formData) => {
         try {
-            setLoading(true);
+            setLoading(true)
             const { data } = await api.post("/client", formData)
             setClient(data)
             toast.success("Registro Realizado com sucesso!")
@@ -76,12 +77,12 @@ export const RegisterForm = () => {
                         disabled={loading}
                     />
                 </form>
-                    <button className="btn-tertiary register" type="submit" disabled={loading}>
-                        {loading ? "Registrando..." : "Registrar"}
-                    </button>
-                    <Link className="btn-tertiary loginRegister" to="/login">
-                        Login
-                    </Link>
+                <button className="btn-tertiary register" type="submit" disabled={loading}>
+                    {loading ? "Registrando..." : "Registrar"}
+                </button>
+                <Link className="btn-tertiary loginRegister" to="/login">
+                    Login
+                </Link>
             </section>
         </>
     )
