@@ -11,8 +11,7 @@ import { jwtDecode } from "jwt-decode"
 import style from "./style.module.scss"
 
 export const LoginForm = () => {
-    const { setClient } = useContext(ClientContext)
-    const { loading } = useContext(ClientContext)
+    const { setClient, loading, getClientById, count, setCount } = useContext(ClientContext)
     const navigate = useNavigate()
     const token = localStorage.getItem("@TOKEN")
 
@@ -24,10 +23,14 @@ export const LoginForm = () => {
     const clientLogin = async (formData) => {
         try {
             const { data } = await api.post("/login", formData)
-            const token = jwtDecode(data.token)
+
+            const tokenDecoded = jwtDecode(data.token)
             localStorage.setItem("@TOKEN", data.token)
-            localStorage.setItem("@USERID", token.id)
-            setClient(token.name)
+            localStorage.setItem("@USERID", tokenDecoded.id)
+            localStorage.setItem("@SUBID", tokenDecoded.sub)
+            localStorage.setItem("@ADMIN", tokenDecoded.admin)
+            getClientById()
+            setCount(!count)
             toast.success("Login realizado com sucesso!")
             navigate("/dashboard")
         } catch (error) {
