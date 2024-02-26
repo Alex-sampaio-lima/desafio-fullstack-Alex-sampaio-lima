@@ -12,6 +12,6 @@ export const contactSchema = z.object({
 
 export const contactCreateSchema = contactSchema.omit({ id: true, client: true })
 export const contactUpdateSchema = contactSchema.pick({ email: true, tel: true })
-export const contactReturnSchema = contactSchema.omit({ clientId: true, client: true })
+export const contactReturnSchema = contactSchema.omit({ client: true })
 export const contactReadSchema = contactReturnSchema.array()
 export const contactWitouthClient = contactSchema.omit({ client: true, clientId: true })
