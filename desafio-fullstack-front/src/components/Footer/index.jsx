@@ -5,9 +5,13 @@ import { ClientContext } from "../../providers/client.provider"
 export const Footer = ({ children }) => {
     const { client } = useContext(ClientContext)
 
+    if (!client) {
+        console.error("Client not found!")
+    }
+
     return (
         <footer className={`${style.containerFooter}`}>
-            <p className="headline">Direitos reservado para - {client?.name} </p>
+            <p className="headline">Direitos reservado para - {client[0].name} </p>
         </footer>
     )
 }
