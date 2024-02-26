@@ -26,7 +26,13 @@ Entrega 1 | Tech | 🏁 Desafio Fullstack
 
 Métodos | EndPoints | Descrição| Autenticação e Autorização|
 --------|-----------|----------|---------------------------|
-| GET    | /client      | Lista todos os clientes     | Apenas os administradores              |
-| POST   | /client      | Cadastrar clientes          | Todos clientes, token não é necessário |
-| PATCH  | /client/{id} | Atualizar dados de clientes | Administradores e donos da conta       | 
-| DELETE | /client/{id} | Cadastrar clientes          | Todos clientes, token não é necessário |
+| GET    | /client        | Lista todos os clientes                       | Apenas os administradores                |
+| POST   | /client        | Cadastrar clientes                            | Todos clientes, token não é necessário   |
+| PATCH  | /client/{id}   | Atualizar dados de clientes                   | Administradores e donos da conta         | 
+| DELETE | /client/{id}   | Cadastrar clientes                            | Todos clientes, token não é necessário   |
+| POST   | /login         | realiza o login e gera um token               | Todos clientes, token não é necessário   |
+| POST   | /contact       | Adiciona um novo contato para um cliente      | Donos da conta                           |
+| GET    | /contact       | Lista todos os contatos                       | Apenas administradores                   |
+| GET    | /contact /{id} | Lista os contatos que pertencem a um cliente  | Admin e cliente dono da conta            |
+| DELETE | /contact /{id} | Deleta o contato que pertence a u cliente     | Admin e cliente dono da conta            |
+| PATCH  | /contact /{id} | Atualiza o contato que pertence a um cliente  | Admin e cliente dono da conta            |
