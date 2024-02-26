@@ -5,16 +5,23 @@ import { ContactModal } from "./ContactModal"
 
 
 
-export const Contact = ({ contacts }) => {
-
+export const Contact = ({ contacts, client, clientList }) => {
+    console.log("Client List", clientList)
+    // console.log("Client", client)
+    // console.log("Client", client)
+    
     const { deleteContact } = useContext(ContactContext)
     const [isOpen, setIsOpen] = useState(false)
+    if (!client || client.length === 0) {
+        return <div>Nenhum contato disponível.</div>;
+    }
 
+    console.log("Client aqui", client[0].contact)
 
     return (
         <div className={`${style.containerList} marginInputBottom`}>
             <ul className={`${style.containerUl}`}>
-                {contacts.map((contact) => (
+                {clientList.map((contact) => (
                     <li className={`${style.containerLi}`} key={contact.id}>
                         <div className={`${style.containerContactInfo}`}>
                             <h3 className="headline black">Email:{contact.email}</h3>
