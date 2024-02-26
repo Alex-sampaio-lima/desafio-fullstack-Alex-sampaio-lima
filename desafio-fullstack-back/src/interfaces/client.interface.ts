@@ -1,10 +1,11 @@
 import { z } from "zod";
-import { clientCreateSchema, clientLoginSchema, clientReadSchema, clientReturnSchema } from "../schemas/client.schemas";
+import { clientCreateSchema, clientLoginSchema, clientReadByIdSchema, clientReadSchema, clientReturnSchema } from "../schemas/client.schemas";
 import { DeepPartial, Repository } from "typeorm";
 import Client from "../entities/client.entity";
 
 export type ClientCreate = z.infer<typeof clientCreateSchema>
 export type ClientRead = z.infer<typeof clientReadSchema>
+export type ClientReadById = z.infer<typeof clientReadByIdSchema>
 export type ClientReturn = z.infer<typeof clientReturnSchema>
 export type ClientBodyUpdate = Omit<ClientCreate, 'admin'>
 export type ClientUpdate = DeepPartial<ClientBodyUpdate>
