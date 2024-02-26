@@ -11,13 +11,17 @@ export const createContactService = async (clientId: string, data: ContactCreate
     if (!client) throw new AppError("Client not found", 404)
     const newContact: Contact = contactRepo.create({ client, ...data })
     await contactRepo.save(newContact)
-    console.log(newContact)
     return contactReturnSchema.parse(newContact)
 }
 
 export const readContactService = async (): Promise<ContactRead> => {
     const contacts: ContactRead = await contactRepo.find()
     return contactReadSchema.parse(contacts);
+}
+
+export const readContactByIdService = async (contactId: string): Promise<ContactRead> => {
+    const contact: ContactRead = await contactRepo.find({ where: { id: contactId } })
+    return contactReadSchema.parse(contact)
 }
 
 export const updateContactService = async (contactId: string, data: ContactUpdate): Promise<ContactUpdate> => {
